@@ -17,11 +17,10 @@ router.get('/', function (req, res, next) {
   connection.query('SELECT * FROM user', function (err, rows, fields) {
     if (err) throw err;
 
-    console.log('The solution is: ', rows[0].solution);
+    res.render('index', { title: 'My Web Application', users: rows});
   });
 
   connection.end();
-  res.render('index', { title: 'My Web Application' });
 });
 
 module.exports = router;

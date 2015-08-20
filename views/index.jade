@@ -3,3 +3,15 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  table.table-bordered.table-responsive.table-hover
+    thead
+      tr
+        th User Id
+        th Name
+        th Email
+    tbody
+      for row in users
+        tr
+          td row.id
+          td row.name
+          td row.email
