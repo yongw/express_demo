@@ -1,0 +1,1 @@
+This is a simple Web application using Express web framework and Nodejs. The home page will display a simple table show the data from My SQL database. index.js has the code to connect to My SQL database.
