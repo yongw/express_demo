@@ -13,18 +13,24 @@ router.get('/', function (req, res, next) {
     database: 'foo'
   });
 
-  connection.connect();
-  
-  console.log('Connected to Mysql' + process.env.MYSQL_PORT_3306_TCP);
-  connection.query('SELECT * FROM user', function (err, rows, fields) {
-    if (err) throw err;
-    
-    console.log('Get data from my-sql:' + rows);
-    res.render('index', { title: 'My Web Application', users: rows});
-  });
+  try {
+    connection.connect();
 
-  connection.end();
-  console.log('Leaving home...');
+    console.log('Connected to Mysql' + process.env.MYSQL_PORT_3306_TCP);
+    connection.query('SELECT * FROM user', function (err, rows, fields) {
+      if (err) {
+        res.render('index', { title: 'My Web Application', users: []});
+      } else {
+        console.log('Get data from my-sql:' + rows);
+        res.render('index', { title: 'My Web Application', users: rows});
+      }
+    });
+
+    connection.end();
+  } catch (err) {
+    res.render('index', { title: 'My Web Application', users: []});
+  }
+  
 });
 
 module.exports = router;
